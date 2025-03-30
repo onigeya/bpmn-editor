@@ -254,7 +254,28 @@ export const useGraph = () => {
       { immediate: true },
     )
 
+    // 绑定drawer相关事件
+    bindDrawerEvents(graph.value, store)
+
     return graph.value
+  }
+
+  // 绑定drawer相关事件
+  const bindDrawerEvents = (graph: Graph, store: ReturnType<typeof useBpmnStore>) => {
+    // 监听节点双击事件
+    graph.on('node:dblclick', ({ node }) => {
+      store.openDrawer('node', node.id, node.data)
+    })
+
+    // 监听边双击事件
+    graph.on('edge:dblclick', ({ edge }) => {
+      store.openDrawer('edge', edge.id, edge.data)
+    })
+
+    // 监听画布双击事件
+    graph.on('blank:dblclick', () => {
+      store.openDrawer('canvas', 'process')
+    })
   }
 
   const destroyGraph = () => {

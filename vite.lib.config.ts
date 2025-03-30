@@ -33,6 +33,7 @@ export default defineConfig({
         '@element-plus/icons-vue',
       ],
       output: {
+        exports: 'named',
         globals: {
           vue: 'Vue',
           'element-plus': 'ElementPlus',
@@ -42,7 +43,6 @@ export default defineConfig({
           'camunda-bpmn-moddle': 'CamundaBpmnModdle',
           '@element-plus/icons-vue': 'ElementPlusIconsVue',
         },
-        sourcemap: true,
         indent: true,
         banner: '/* @onigeya/bpmn-editor - MIT License */',
         assetFileNames: (assetInfo) => {

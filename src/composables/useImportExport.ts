@@ -108,13 +108,13 @@ export const useImportExport = () => {
 
     // 1. 从definitions中获取process
     const process = definitions.rootElements.find(
-      (element): element is BpmnProcess => element.$type === 'bpmn:Process',
+      (element: BaseElement): element is BpmnProcess => element.$type === 'bpmn:Process',
     )
     if (!process) return graphData
 
     // 2. 获取图形布局信息
     const diagram = definitions.diagrams?.find(
-      (element): element is BpmnDiagram => element.$type === 'bpmndi:BPMNDiagram',
+      (element: BaseElement): element is BpmnDiagram => element.$type === 'bpmndi:BPMNDiagram',
     )
     if (!diagram) return graphData
 
@@ -411,7 +411,7 @@ export const useImportExport = () => {
 
     // 找到原始Process
     const originalProcess = originalDefs.rootElements.find(
-      (element): element is BpmnProcess => element.$type === 'bpmn:Process',
+      (element: BaseElement): element is BpmnProcess => element.$type === 'bpmn:Process',
     )
 
     if (!originalProcess) {
@@ -532,7 +532,7 @@ export const useImportExport = () => {
 
       // 找到对应的BPMN元素
       const sequenceFlow = newProcess.flowElements.find(
-        (element) => element.id === edge.id,
+        (element: FlowElement) => element.id === edge.id,
       ) as FlowElement
 
       if (!sequenceFlow) continue
