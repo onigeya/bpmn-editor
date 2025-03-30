@@ -1,6 +1,6 @@
 {
   "name": "@onigeya/bpmn-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "一个基于 Vue 3 开发的轻量级、可扩展的 BPMN 流程图编辑器组件",
   "keywords": [
