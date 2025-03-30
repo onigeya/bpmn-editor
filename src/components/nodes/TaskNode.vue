@@ -1,7 +1,7 @@
 <template>
   <el-card shadow="hover" class="task-node" :class="config.size">
     <div class="task-content">
-      {{ node.data?.label || '' }}
+      {{ node.data?.original?.name || '' }}
     </div>
   </el-card>
 </template>

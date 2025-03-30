@@ -1,7 +1,7 @@
 <template>
   <el-card shadow="hover" class="event-node" :class="config.size">
     <div class="event-content">
-      {{ node.data?.label || '' }}
+      {{ label }}
     </div>
   </el-card>
 </template>
@@ -10,12 +10,28 @@
 import { ElCard } from 'element-plus'
 import type { Node } from '@antv/x6'
 import { useGlobalConfig } from 'element-plus'
+import { computed } from 'vue'
 
 const config = useGlobalConfig()
 
-defineProps<{
+const props = defineProps<{
   node: Node
 }>()
+
+const label = computed(() => {
+  switch (props.node.data?.original.$type) {
+    case 'bpmn:StartEvent':
+      return '开始'
+    case 'bpmn:EndEvent':
+      return '结束'
+    case 'bpmn:IntermediateCatchEvent':
+      return '中间捕获'
+    case 'bpmn:IntermediateThrowEvent':
+      return '中间抛出'
+    default:
+      return ''
+  }
+})
 </script>
 
 <style lang="scss" scoped>

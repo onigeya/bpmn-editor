@@ -1,7 +1,7 @@
 <template>
   <el-card shadow="hover" class="gateway-node" :class="config.size">
     <div class="gateway-content">
-      {{ node.data?.label || '' }}
+      {{ label }}
     </div>
   </el-card>
 </template>
@@ -10,12 +10,34 @@
 import { ElCard } from 'element-plus'
 import type { Node } from '@antv/x6'
 import { useGlobalConfig } from 'element-plus'
+import { computed } from 'vue'
 
 const config = useGlobalConfig()
 
-defineProps<{
+const props = defineProps<{
   node: Node
 }>()
+
+const label = computed(() => {
+  switch (props.node.data?.original.$type) {
+    case 'bpmn:ExclusiveGateway':
+      return '条件分支'
+    case 'bpmn:ParallelGateway':
+      return '并行分支'
+    case 'bpmn:InclusiveGateway':
+      return '并行分支'
+    case 'bpmn:EventBasedGateway':
+      return '事件分支'
+    case 'bpmn:ComplexGateway':
+      return '复杂分支'
+    case 'bpmn:DataObjectReference':
+      return '数据对象引用'
+    case 'bpmn:DataStoreReference':
+      return '数据存储引用'
+    default:
+      return ''
+  }
+})
 </script>
 
 <style lang="scss" scoped>
