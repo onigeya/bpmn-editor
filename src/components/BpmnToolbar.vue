@@ -2,16 +2,18 @@
   <div class="toolbar" :class="config.size">
     <div class="title">导入</div>
     <div class="buttons">
-      <el-button type="primary">导入</el-button>
-      <el-button type="primary">导出</el-button>
+      <el-button type="primary" @click="handleImport">导入</el-button>
+      <el-button type="primary" @click="handleExport">导出</el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useGlobalConfig } from 'element-plus'
+import { useImportExport } from '../composables/useImportExport'
 
 const config = useGlobalConfig()
+const { handleImport, handleExport } = useImportExport()
 </script>
 
 <style lang="scss" scoped>
@@ -33,6 +35,7 @@ const config = useGlobalConfig()
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 8px;
   }
 
   &.small {
